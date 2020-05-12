@@ -1,0 +1,48 @@
+﻿@model TravelEurope.Areas.AdminPanel.ViewModels.RadniciIndexVM
+@{
+    Layout = "AdminPanelLayout";
+}
+<h2>Lista trenutno zaposlenih radnika</h2>
+<div class="card mb-3">
+    <div class="card-header">
+        <i class="fas fa-table"></i>
+        Trenutno zaposleni
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>Ime i prezime</th>
+                        <th>JMBG</th>
+                        <th>Adresa</th>
+                        <th>Telefon</th>
+                        <th>Grad</th>
+                        <th>Godine staža</th>
+                        <th>Pozicija</th>
+                        <th>Akcije</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var x in Model.Rows)
+                    {
+                        <tr>
+                            <td>@x.ImePrezime</td>
+                            <td>@x.JMBG</td>
+                            <td>@x.Adresa</td>
+                            <td>@x.Telefon</td>
+                            <td>@x.Grad</td>
+                            <td>@x.GodineStaza</td>
+                            <td>@x.Pozicija</td>
+                            <td>
+                                <a asp-action="Uredi" asp-controller="Radnici" asp-route-id="@x.KorisnikId" class="btn btn-info font-sizes"><i class="fas fa-search icons-margin-right"></i> Uredi </a>
+                                <a asp-action="Obrisi" asp-controller="Radnici" asp-route-id="@x.KorisnikId" class="btn btn-danger font-sizes"><i class="fas fa-delete icons-margin-right"></i> Obriši radnika</a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<a asp-action="Dodaj" asp-controller="Radnici" class="btn btn-success  col-md-2 font-sizes"><i class="fas fa-plus-circle icons-margin-right"></i> Dodaj radnika</a>

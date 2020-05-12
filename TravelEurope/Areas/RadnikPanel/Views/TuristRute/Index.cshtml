@@ -1,0 +1,46 @@
+﻿@using TravelEurope.Areas.RadnikPanel.ViewModels
+@model TravelEurope.Areas.RadnikPanel.ViewModels.TuristRuteIndexVM
+@{
+    ViewData["Title"] = "TravelEurope";
+    Layout = "RadnikPanelLayout";
+}
+<h2>Lista svih turist ruta</h2>
+<div class="card mb-3">
+    <div class="card-header">
+        <i class="fas fa-table"></i>
+        Trenutne turist rute
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>Naziv</th>
+                        <th>Opis</th>
+                        <th>Turistički vodič</th>
+                        <th>Država</th>
+                        <th>Cijena po danu</th>
+                        <th>Akcije</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var x in Model.Rows)
+                    {
+                    <tr>
+                        <td>@x.Naziv</td>
+                        <td>@x.Opis</td>
+                        <td>@x.TuristickiVodic</td>
+                        <td>@x.Drzava</td>
+                        <td>@x.CijenaPoDanu KM</td>
+                        <td>
+                            <a asp-action="Uredi" asp-controller="TuristRute" asp-route-id="@x.TuristRutaId" class="btn btn-info font-sizes"><i class="fas fa-search icons-margin-right"></i> Uredi </a>
+                            <a asp-action="Obrisi" asp-controller="TuristRute" asp-route-id="@x.TuristRutaId" class="btn btn-danger font-sizes"><i class="fas fa-delete icons-margin-right"></i> Obriši turist rutu</a>
+                        </td>
+                    </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<a asp-action="Dodaj" asp-controller="TuristRute" class="btn btn-success  col-md-2 font-sizes"><i class="fas fa-plus-circle icons-margin-right"></i> Dodaj turist rutu</a>

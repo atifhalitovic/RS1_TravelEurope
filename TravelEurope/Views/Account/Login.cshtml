@@ -1,0 +1,23 @@
+﻿@model TravelEurope.ViewModels.LoginVM
+@{
+    ViewData["Title"] = "TravelEurope";
+    Layout = "_LayoutLogin";
+}
+<p></p>
+<h3>Dobro došli na login stranicu.</h3>
+<h4>Unesite svoje podatke!</h4>
+<div class="form">
+    <form asp-controller="Account" asp-action="Login" method="post">
+        <div class="form-group">
+            <label asp-for="@Model.Username"></label>
+            <input asp-for="@Model.Username" class="form-control" />
+            <span asp-validation-for="@Model.Username"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="@Model.Password"></label>
+            <input asp-for="@Model.Password" type="password" class="form-control" />
+            <span asp-validation-for="@Model.Password"></span>
+        </div>
+        <input type="submit" class="btn btn-success" value="Logirajte se" style="margin: 10px 10px 10px 10px;" />
+    </form>
+</div>

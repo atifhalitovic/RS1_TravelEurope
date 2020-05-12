@@ -1,0 +1,168 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
+    <UserSecretsId>aspnet-TravelEurope-C7634EB3-A2F4-4A2B-9717-A98DFA9A5BA7</UserSecretsId>
+    <PublishWithAspNetCoreTargetManifest>false</PublishWithAspNetCoreTargetManifest>
+    <LangVersion>7.2</LangVersion>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Areas\AdminPanel\Controllers\AdminPanelController.cs" />
+    <Compile Remove="Areas\AdminPanel\Views\Home\EnableAuthenticator.cshtml.cs" />
+    <Compile Remove="Data\Migrations\20191112150048_2_1.cs" />
+    <Compile Remove="Data\Migrations\20191112150048_2_1.Designer.cs" />
+    <Compile Remove="Data\Migrations\20191112150426_2_1.cs" />
+    <Compile Remove="Data\Migrations\20191112150426_2_1.Designer.cs" />
+    <Compile Remove="Data\Migrations\20191112150621_2_1.cs" />
+    <Compile Remove="Data\Migrations\20191112150621_2_1.Designer.cs" />
+    <Compile Remove="Data\Migrations\20191122161635_5_0.cs" />
+    <Compile Remove="Data\Migrations\20191122161635_5_0.Designer.cs" />
+    <Compile Remove="Helper\Autentifikacija.cs" />
+    <Compile Remove="Helper\Autorizacija.cs" />
+    <Compile Remove="Helper\Funkcije.cs" />
+    <Compile Remove="ViewModels\AuthenticatorDetailsVM.cs" />
+    <Compile Remove="ViewModels\EnableAuthenticator.cshtml.cs" />
+    <Compile Remove="ViewModels\Login2FaVM.cs" />
+    <Compile Remove="ViewModels\LoginWith2fa.cshtml.cs" />
+    <Compile Remove="ViewModels\TwoFactorAuthentication.cshtml.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Remove="Areas\AdminPanel\Views\TuristRute\Dodaj.cshtml" />
+    <Content Remove="Areas\AdminPanel\Views\TuristRute\Uredi.cshtml" />
+    <Content Remove="Areas\AdminPanel\Views\Vozaci\Dodaj.cshtml" />
+    <Content Remove="Areas\AdminPanel\Views\Vozaci\Uredi.cshtml" />
+    <Content Remove="Areas\AdminPanel\Views\Vozila\Dodaj.cshtml" />
+    <Content Remove="Areas\AdminPanel\Views\Vozila\Uredi.cshtml" />
+    <Content Remove="Areas\RadnikPanel\Views\Home\Dodaj.cshtml" />
+    <Content Remove="Areas\RadnikPanel\Views\Radnici\Dodaj.cshtml" />
+    <Content Remove="Areas\RadnikPanel\Views\Radnici\Uredi.cshtml" />
+    <Content Remove="Views\Profil\Dodaj - Copy.cshtml" />
+    <Content Remove="Views\Profil\EnableAuthenticator.cshtml" />
+    <Content Remove="Views\Profil\LoginWith2fa.cshtml" />
+    <Content Remove="Views\Profil\TwoFactorAuthentication.cshtml" />
+    <Content Remove="Views\Shared\RadnikPanelLayout.cshtml" />
+    <Content Remove="Views\Shared\_LayoutRegister - Copy.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="bootstrap" Version="4.3.1" />
+    <PackageReference Include="GoogleAuthenticatorService.Core" Version="1.0.2" />
+    <PackageReference Include="Microsoft.AspNetCore.All" Version="2.1.1" />
+    <PackageReference Include="Microsoft.AspNetCore.App" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity" Version="2.1.1" />
+    <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.1.2" PrivateAssets="All" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="2.1.1" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="2.1.1" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="2.1.1">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.1.9" />
+    <PackageReference Include="NETCore.Encrypt" Version="2.0.8" />
+    <PackageReference Include="popper.js" Version="1.14.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Areas\AdminPanel\Data\" />
+    <Folder Include="Areas\Identity\Services\" />
+    <Folder Include="Areas\RadnikPanel\Data\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="Areas\AdminPanel\Views\Drzave\Dodaj.cshtml" />
+    <None Include="Areas\AdminPanel\Views\Drzave\Index.cshtml" />
+    <None Include="Areas\AdminPanel\Views\Gradovi\Dodaj.cshtml" />
+    <None Include="Areas\AdminPanel\Views\Gradovi\Index.cshtml" />
+    <None Include="Areas\AdminPanel\Views\Izvjestaji\Index.cshtml" />
+    <None Include="Areas\AdminPanel\Views\Rezervacije\Index.cshtml" />
+    <None Include="Areas\AdminPanel\Views\Rezervacije\TuristRute.cshtml" />
+    <None Include="Areas\AdminPanel\Views\Rezervacije\Vozaci.cshtml" />
+    <None Include="Areas\AdminPanel\Views\Rezervacije\Vozila.cshtml" />
+    <None Include="Areas\AdminPanel\Views\TuristRute\Index.cshtml" />
+    <None Include="Areas\AdminPanel\Views\Vozaci\Index.cshtml" />
+    <None Include="Areas\AdminPanel\Views\Vozila\Index.cshtml" />
+    <None Include="Areas\RadnikPanel\Views\Drzave\Dodaj.cshtml" />
+    <None Include="Areas\RadnikPanel\Views\Drzave\Index.cshtml" />
+    <None Include="Areas\RadnikPanel\Views\Drzave\Uredi.cshtml" />
+    <None Include="Areas\RadnikPanel\Views\Gradovi\Dodaj.cshtml" />
+    <None Include="Areas\RadnikPanel\Views\Gradovi\Index.cshtml" />
+    <None Include="Areas\RadnikPanel\Views\Gradovi\Uredi.cshtml" />
+    <None Include="Areas\RadnikPanel\Views\Home\Detalji.cshtml" />
+    <None Include="Areas\RadnikPanel\Views\Home\Index.cshtml" />
+    <None Include="Areas\RadnikPanel\Views\Izvjestaji\Index.cshtml" />
+    <None Include="Areas\RadnikPanel\Views\Racuni\Index.cshtml" />
+    <None Include="Areas\RadnikPanel\Views\Radnici\Detalji.cshtml" />
+    <None Include="Areas\RadnikPanel\Views\Radnici\Index.cshtml" />
+    <None Include="Areas\RadnikPanel\Views\Rezervacije\Index.cshtml" />
+    <None Include="Areas\RadnikPanel\Views\Rezervacije\TuristRute.cshtml" />
+    <None Include="Areas\RadnikPanel\Views\Rezervacije\Vozaci.cshtml" />
+    <None Include="Areas\RadnikPanel\Views\Rezervacije\Vozila.cshtml" />
+    <None Include="Areas\RadnikPanel\Views\Shared\RadnikPanelLayout.cshtml" />
+    <None Include="Areas\RadnikPanel\Views\TuristRute\Dodaj.cshtml" />
+    <None Include="Areas\RadnikPanel\Views\TuristRute\Index.cshtml" />
+    <None Include="Areas\RadnikPanel\Views\TuristRute\Uredi.cshtml" />
+    <None Include="Areas\RadnikPanel\Views\Vozaci\Dodaj.cshtml" />
+    <None Include="Areas\RadnikPanel\Views\Vozaci\Index.cshtml" />
+    <None Include="Areas\RadnikPanel\Views\Vozaci\Uredi.cshtml" />
+    <None Include="Areas\RadnikPanel\Views\Vozila\Dodaj.cshtml" />
+    <None Include="Areas\RadnikPanel\Views\Vozila\Index.cshtml" />
+    <None Include="Areas\RadnikPanel\Views\Vozila\Uredi.cshtml" />
+    <None Include="Areas\RadnikPanel\Views\_ViewImports.cshtml" />
+    <None Include="Areas\RadnikPanel\Views\_ViewStart.cshtml" />
+    <None Include="wwwroot\js\demo\chart-area-demo.js" />
+    <None Include="wwwroot\js\demo\chart-bar-demo.js" />
+    <None Include="wwwroot\js\demo\chart-pie-demo.js" />
+    <None Include="wwwroot\js\demo\datatables-demo.js" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Update="Areas\AdminPanel\Views\Drzave\Uredi.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Areas\AdminPanel\Views\Gradovi\Uredi.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Areas\AdminPanel\Views\Home\Detalji.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Areas\AdminPanel\Views\Racuni\Index.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Areas\AdminPanel\Views\Radnici\Uredi.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Areas\AdminPanel\Views\Radnici\Detalji.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Areas\AdminPanel\Views\Shared\AdminPanelLayout.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Views\Account\RegistracijaSucceedLogin.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Views\Profil\Kreiraj.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Views\Profil\Detalji.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Views\Shared\_LayoutLogin2.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Views\Shared\_LayoutRegister2.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Views\Shared\_LayoutRegister.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Views\_ViewImports.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Views\_ViewStart.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+  </ItemGroup>
+
+</Project>

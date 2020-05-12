@@ -1,0 +1,48 @@
+﻿@using TravelEurope.Areas.AdminPanel.ViewModels
+@model TravelEurope.Areas.AdminPanel.ViewModels.RezervacijeVozilaVM
+@{
+    ViewData["Title"] = "TravelEurope";
+    Layout = "AdminPanelLayout";
+}
+<h3>Rezervacije se mogu pregledati nakon kreiranja modula Klijent koji pravi drugi student</h3>
+<div class="card mb-3">
+    <div class="card-header">
+        <i class="fas fa-table"></i>
+        Trenutne rezervacije vozila
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>Broj rezervacije</th>
+                        <th>Vozilo</th>
+                        <th>Datum kreiranja</th>
+                        <th>Datum završetka</th>
+                        <th>Cijena usluge po danu</th>
+                        <th>Cijena osiguranja</th>
+                        <th>Klijent</th>
+                        <th>Radnik</th>
+                        <th>Ukupna cijena</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var x in Model.Rows)
+                    {
+                        <tr>
+                            <th>@x.RezervacijaId</th>
+                            <th>@x.Vozilo</th>
+                            <th>@x.DatumPreuzimanja</th>
+                            <th>@x.DatumVracanja</th>
+                            <th>@x.CijenaUslugePoDanu</th>
+                            <th>@x.CijenaOsiguranja</th>
+                            <th>@x.Klijent</th>
+                            <th>@x.Radnik</th>
+                            <th>@x.UkupnaCijena</th>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

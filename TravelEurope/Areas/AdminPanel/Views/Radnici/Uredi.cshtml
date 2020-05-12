@@ -1,0 +1,80 @@
+﻿@model TravelEurope.Areas.AdminPanel.ViewModels.RadniciDodajVM
+@{
+    Layout = "AdminPanelLayout";
+}
+<form asp-area="AdminPanel" asp-controller="Radnici" asp-action="UrediSave">
+    <div class="form-group">
+        @Html.HiddenFor(x => x.Radnik.RadnikId)
+        <div class="row">
+            <div class="col-3 col-sm-3">
+                @Html.HiddenFor(x => x.Radnik.RadnikId)
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-3 col-sm-3">
+                <label asp-for="@Model.Radnik.ApplicationUser.Ime">Ime </label><br />
+                <input asp-for="@Model.Radnik.ApplicationUser.Ime" class="form-control">
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-3 col-sm-3">
+                <label asp-for="@Model.Radnik.ApplicationUser.Prezime">Prezime </label>
+                <input asp-for="@Model.Radnik.ApplicationUser.Prezime" class="form-control">
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-3 col-sm-3">
+                <label asp-for="@Model.Radnik.ApplicationUser.JMBG">JMBG </label>
+                <input asp-for="@Model.Radnik.ApplicationUser.JMBG" class="form-control">
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-3 col-sm-3">
+                <label asp-for="@Model.Radnik.ApplicationUser.Adresa">Adresa </label>
+                <input asp-for="@Model.Radnik.ApplicationUser.Adresa" class="form-control">
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-3 col-sm-3">
+                <label asp-for="@Model.Radnik.ApplicationUser.Telefon">Telefon </label>
+                <input asp-for="@Model.Radnik.ApplicationUser.Telefon" class="form-control">
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-3 col-sm-3">
+                <label asp-for="@Model.Radnik.ApplicationUser.GradId">Grad </label>
+                <select asp-for="@Model.Radnik.ApplicationUser.GradId" asp-items="@Model.Gradovi" class="form-control"></select>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-3 col-sm-3">
+                <label asp-for="@Model.Radnik.GodineStaza">Godine staza </label>
+                <input asp-for="@Model.Radnik.GodineStaza" class="form-control">
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-3 col-sm-3">
+                <label asp-for="@Model.Radnik.Pozicija">Pozicija </label>
+                <input asp-for="@Model.Radnik.Pozicija" class="form-control">
+            </div>
+        </div>
+        <br />
+        <div class="form-group">
+            <div class="row">
+                <div class="col-12 col-sm-12">
+                    <div class="col-12 col-sm-12 text-left">
+                        <button class="btn btn-outline-success">Snimi</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</form>

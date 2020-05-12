@@ -1,0 +1,38 @@
+﻿@using TravelEurope.Areas.AdminPanel.ViewModels
+@model DrzaveIndexVM
+@{
+    ViewData["Title"] = "TravelEurope";
+ Layout = "AdminPanelLayout";
+}
+<h2>Lista država</h2>
+<div class="card mb-3">
+    <div class="card-header">
+        <i class="fas fa-table"></i>
+        Države u kompaniji
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>Naziv</th>
+                        <th>Akcije</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var x in Model.Rows)
+                    {
+                        <tr>
+                            <td>@x.Naziv</td>
+                            <td>
+                                <a asp-action="Uredi" asp-controller="Drzave" asp-route-id="@x.DrzavaId" class="btn btn-info font-sizes"><i class="fas fa-search icons-margin-right"></i> Uredi </a>
+                                <a asp-action="Obrisi" asp-controller="Drzave" asp-route-id="@x.DrzavaId" class="btn btn-danger font-sizes"><i class="fas fa-delete icons-margin-right"></i> Obriši državu</a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<a asp-action="Dodaj" asp-controller="Drzave" class="btn btn-success  col-md-2 font-sizes"><i class="fas fa-plus-circle icons-margin-right"></i> Dodaj državu</a>

@@ -1,0 +1,47 @@
+﻿@using TravelEurope.Areas.AdminPanel.ViewModels
+@model TravelEurope.Areas.AdminPanel.ViewModels.RacuniIndexVM
+@{
+    ViewData["Title"] = "TravelEurope";
+    Layout = "AdminPanelLayout";
+}
+<h3>Računi se mogu pregledati nakon kreiranja modula Klijent koji pravi drugi student</h3>
+
+<div class="card mb-3">
+    <div class="card-header">
+        <i class="fas fa-table"></i>
+        Izdati računi
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>Račun broj</th>
+                        <th>Rezervacija broj</th>
+                        <th>Datum izdavanja</th>
+                        <th>Cijena za jedan dan (sa PDV-om)</th>
+                        <th>Trajanje renta</th>
+                        <th>Ukupna cijena</th>
+                        <th>Nacin placanja</th>
+                        <th>Akcije</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var x in Model.Rows)
+                    {
+                        <tr>
+                            <td>@x.RacunId</td>
+                            <td>@x.RezervacijaId</td>
+                            <td>@x.DatumIzdavanja</td>
+                            <td>@x.CijenaUslugeSaPDVom</td>
+                            <td>@x.TrajanjeRentanjaDani</td>
+                            <td>@x.UkupnaCijena</td>
+                            <td>@x.NacinPlacanja</td>
+                            <td></td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

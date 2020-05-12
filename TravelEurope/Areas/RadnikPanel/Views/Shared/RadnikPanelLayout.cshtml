@@ -1,0 +1,361 @@
+﻿@using Microsoft.AspNetCore.Identity
+@using System.Security.Claims;
+@using TravelEurope.Helper
+@inject SignInManager<ApplicationUser> signInManager
+@inject UserManager<ApplicationUser> userManager
+@{
+    var controller = ViewContext.RouteData.Values["Controller"];
+    var action = MyExtensions.FirstCharToUpper(ViewContext.RouteData.Values["Action"].ToString().Replace("_", " "));
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <environment include="Production">
+        <script src="~/vendor/jquery/dist/jquery.js" asp-append-version="true"></script>
+        <!-- Bootstrap core JavaScript-->
+        <script src="~/vendor/jquery/jquery.min.js" asp-append-version="true"></script>
+        <script src="~/vendor/datatables/jquery.dataTables.js" asp-append-version="true"></script>
+        <script src="~/vendor/jquery-easing/jquery.easing.min.js" asp-append-version="true"></script>
+
+        <script src="~/vendor/bootstrap/js/bootstrap.bundle.min.js" asp-append-version="true"></script>
+        <link rel="~/stylesheet" href="~/vendor/bootstrap/dist/css/bootstrap.css"  asp-append-version="true"/>
+        <link rel="~/stylesheet" href="~/css/site.css"  asp-append-version="true"/>
+        <!-- Bootstrap core CSS-->
+        <link href="~/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" asp-append-version="true">
+        <!-- Custom fonts for this template-->
+        <link href="~/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css" asp-append-version="true">
+        <!-- Page level plugin CSS-->
+        <link href="~/vendor/datatables/dataTables.bootstrap4.css" rel="stylesheet" asp-append-version="true">
+        <!-- Custom styles for this template-->
+        <link href="~/css/site.css" rel="stylesheet" asp-append-version="true">
+        <script src="~/vendor/bootstrap/dist/js/bootstrap.js" asp-append-version="true"></script>
+        <script src="~/js/site.js" asp-append-version="true"></script>
+        <!-- Core plugin JavaScript-->
+        <!-- Page level plugin JavaScript-->
+        <script src="~/vendor/chart.js/Chart.min.js" asp-append-version="true"></script>
+        <script src="~/vendor/datatables/dataTables.bootstrap4.js" asp-append-version="true"></script>
+        <!-- Custom scripts for all pages-->
+        <script src="~/js/site.min.js" asp-append-version="true"></script>
+        <!-- Demo scripts for this page-->
+        <script src="~/js/demo/datatables-demo.js" asp-append-version="true"></script>
+        <script src="~/js/demo/chart-area-demo.js" asp-append-version="true"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"  asp-append-version="true" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    </environment>
+    <title>TravelEurope - Radnik panel</title>
+</head>
+<body id="page-top">
+    <nav class="navbar navbar-expand navbar-dark bg-dark static-top">
+        <a class="navbar-brand mr-1" asp-action="Index" asp-controller="Home">
+            <i class="fas fa-globe"></i> TravelEurope system
+        </a>
+
+        <!-- Navbar Search -->
+        <form class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0">
+            <div class="input-group">
+                <div class="input-group-append">
+                </div>
+            </div>
+        </form>
+        <!-- Navbar -->
+        <ul class="navbar-nav ml-auto ml-md-0">
+            @if (signInManager.IsSignedIn(User))
+            {
+                <li class="nav-item dropdown no-arrow">
+                    <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <i class="fas fa-user-circle fa-fw"></i>
+                        @User.Identity.Name
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
+                        <a class="dropdown-item" asp-controller="Home" asp-action="Detalji" asp-route-id="@this.User.FindFirstValue(ClaimTypes.NameIdentifier)">Detalji</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" asp-action="Logout" asp-controller="Account" asp-area="">Logout</a>
+                    </div>
+                </li>
+            }
+            else
+            {
+                <li class="nav-item dropdown no-arrow">
+                    <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <i class="fas fa-user-circle fa-fw"></i>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
+                        <a class="dropdown-item" asp-controller="Home" asp-action="Detalji" asp-route-id="@this.User.FindFirstValue(ClaimTypes.NameIdentifier)">Detalji</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" asp-controller="Account" asp-action="Logout">Logout</a>
+                    </div>
+                </li>
+            }
+        </ul>
+    </nav>
+    <div id="wrapper">
+        <!-- Sidebar -->
+        <ul class="sidebar navbar-nav">
+            <li class="nav-item active">
+                <a class="nav-link" asp-action="Index">
+                    <i class="fas fa-fw fa-tachometer-alt"></i>
+                    <span>Panel</span>
+                </a>
+            </li>
+            <div class="dropdown-divider"></div>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" asp-controller="Radnici" asp-action="Index" id="pagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <i class="fas fa-fw fa-people-carry"></i>
+                    <span>Radnici</span>
+                </a>
+                <div class="dropdown-menu" aria-labelledby="pagesDropdown">
+                    <a class="dropdown-item" asp-controller="Radnici" asp-action="Index">Lista radnika</a>
+                </div>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" asp-controller="Drzave" asp-action="Index" id="pagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <i class="fas fa-fw fa-flag"></i>
+                    <span>Države</span>
+                </a>
+                <div class="dropdown-menu" aria-labelledby="pagesDropdown">
+                    <a class="dropdown-item" asp-controller="Drzave" asp-action="Index">Lista država</a>
+                    <div class="dropdown-divider"></div>
+                    <h6 class="dropdown-header">Akcije</h6>
+                    <a class="dropdown-item" asp-controller="Drzave" asp-action="Dodaj">Dodaj državu</a>
+                </div>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" asp-controller="Gradovi" asp-action="Index" id="pagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <i class="fas fa-fw fa-city"></i>
+                    <span>Gradovi</span>
+                </a>
+                <div class="dropdown-menu" aria-labelledby="pagesDropdown">
+                    <a class="dropdown-item" asp-controller="Gradovi" asp-action="Index">Lista gradova</a>
+                    <div class="dropdown-divider"></div>
+                    <h6 class="dropdown-header">Akcije</h6>
+                    <a class="dropdown-item" asp-controller="Gradovi" asp-action="Dodaj">Dodaj grad</a>
+                </div>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" asp-controller="Vozila" asp-action="Index" id="pagesDropdown" role="button" data-toggle="dropdown"
+                   aria-haspopup="true" aria-expanded="false">
+                    <i class="fas fa-fw fa-car"></i>
+                    <span>Vozila</span>
+                </a>
+                <div class="dropdown-menu" aria-labelledby="pagesDropdown">
+                    <a class="dropdown-item" asp-controller="Vozila" asp-action="Index">Lista vozila</a>
+                    <div class="dropdown-divider"></div>
+                    <h6 class="dropdown-header">Akcije</h6>
+                    <a class="dropdown-item" asp-controller="Vozila" asp-action="Dodaj">Dodaj vozilo</a>
+                </div>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="charts.html" id="pagesDropdown" role="button" data-toggle="dropdown"
+                   aria-haspopup="true" aria-expanded="false">
+                    <i class="fas fa-fw fa-globe"></i>
+                    <span>Turist rute</span>
+                </a>
+                <div class="dropdown-menu" aria-labelledby="pagesDropdown">
+                    <a class="dropdown-item" asp-controller="TuristRute" asp-action="Index">Lista turist ruta</a>
+                    <div class="dropdown-divider"></div>
+                    <h6 class="dropdown-header">Akcije</h6>
+                    <a class="dropdown-item" asp-controller="TuristRute" asp-action="Dodaj">Dodaj turist rutu</a>
+                </div>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="charts.html" id="pagesDropdown" role="button" data-toggle="dropdown"
+                   aria-haspopup="true" aria-expanded="false">
+                    <i class="fas fa-fw fa-calculator"></i>
+                    <span>Vozači</span>
+                </a>
+                <div class="dropdown-menu" aria-labelledby="pagesDropdown">
+                    <a class="dropdown-item" asp-controller="Vozaci" asp-action="Index">Lista vozača</a>
+                    <div class="dropdown-divider"></div>
+                    <h6 class="dropdown-header">Akcije</h6>
+                    <a class="dropdown-item" asp-controller="Vozaci" asp-action="Dodaj">Dodaj vozača</a>
+                </div>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="charts.html" id="pagesDropdown" role="button" data-toggle="dropdown"
+                   aria-haspopup="true" aria-expanded="false">
+                    <i class="fas fa-fw fa-paper-plane"></i>
+                    <span>Rezervacije</span>
+                </a>
+                <div class="dropdown-menu" aria-labelledby="pagesDropdown">
+                    <a class="dropdown-item" asp-controller="Rezervacije" asp-action="Vozila">Rezervacije - vozila</a>
+                    <a class="dropdown-item" asp-controller="Rezervacije" asp-action="TuristRute">Rezervacije - turist ruta</a>
+                    <a class="dropdown-item" asp-controller="Rezervacije" asp-action="Vozaci">Rezervacije - vozači</a>
+                </div>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="charts.html" id="pagesDropdown" role="button" data-toggle="dropdown"
+                   aria-haspopup="true" aria-expanded="false">
+                    <i class="fas fa-fw fa-money-bill"></i>
+                    <span>Računi</span>
+                </a>
+                <div class="dropdown-menu" aria-labelledby="pagesDropdown">
+                    <a class="dropdown-item" asp-controller="Racuni" asp-action="Index">Lista računa</a>
+                </div>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" asp-controller="Izvjestaji" asp-action="Index">
+                    <i class="fas fa-fw fa-chart-area"></i>
+                    <span>Izvještaji</span>
+                </a>
+            </li>
+        </ul>
+        <div id="content-wrapper">
+            <div class="container-fluid">
+                <!-- Breadcrumbs-->
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item active">
+                        <a asp-area="RadnikPanel" asp-controller="Home" asp-action="Index"><i class="fa fa-home"></i> Radnik</a>
+                        @if (!controller.Equals("Home"))
+                        {
+                        <span>
+                            / @controller /
+                            @if (action == "Index")
+                            {
+                                <a>Lista</a>
+                            }
+                            else
+                            {
+                                <a>@action</a>
+                            }
+                            </span>
+                        }
+</li>
+                </ol>
+                <!-- Icon Cards-->
+                <div class="row">
+                    <div class="col-xl-3 col-sm-6 mb-3">
+                        <div class="card text-white bg-primary o-hidden h-100">
+                            <div class="card-body">
+                                <div class="card-body-icon">
+                                    <i class="fas fa-fw fa-car"></i>
+                                </div>
+                                <div class="mr-5">Nekoliko novih vozila!</div>
+                            </div>
+                            <a class="card-footer text-white clearfix small z-1" asp-controller="Vozila">
+                                <span class="float-left">Pogledajte detaljno!</span>
+                                <span class="float-right">
+                                    <i class="fas fa-angle-right"></i>
+                                </span>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-sm-6 mb-3">
+                        <div class="card text-white bg-success o-hidden h-100">
+                            <div class="card-body">
+                                <div class="card-body-icon">
+                                    <i class="fas fa-fw fa-globe"></i>
+                                </div>
+                                <div class="mr-5">Nekoliko novih turist ruta!</div>
+                            </div>
+                            <a class="card-footer text-white clearfix small z-1" asp-controller="TuristRute">
+                                <span class="float-left">Pogledajte detaljno!</span>
+                                <span class="float-right">
+                                    <i class="fas fa-angle-right"></i>
+                                </span>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-sm-6 mb-3">
+                        <div class="card text-white bg-danger o-hidden h-100">
+                            <div class="card-body">
+                                <div class="card-body-icon">
+                                    <i class="fas fa-fw fa-print"></i>
+                                </div>
+                                <div class="mr-5">Printajte izvjestaje</div>
+                            </div>
+                            <a class="card-footer text-white clearfix small z-1" asp-controller="Izvjestaji">
+                                <span class="float-left">Pogledajte detaljno!</span>
+                                <span class="float-right">
+                                    <i class="fas fa-angle-right"></i>
+                                </span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="card mb-3">
+                    <div class="modal-body">@RenderBody()</div>
+                </div>
+                <br />
+
+            </div>
+            <div class="card mb-4">
+                <div style="overflow:hidden;width: 1263px;position: relative;">
+                    <iframe width="1263" height="440" src="https://maps.google.com/maps?width=1200&amp;height=440&amp;hl=en&amp;q=Gostilna%20kod%20Akare%20%22Garage%22+(Gostilna%20kod%20Akare%20%22Garage%22)&amp;ie=UTF8&amp;t=&amp;z=14&amp;iwloc=B&amp;output=embed"
+                            frameborder="0" scrolling="no" marginheight="0" marginwidth="0"></iframe>
+                    <div style="position: absolute;width: 80%;bottom: 20px;left: 0;right: 0;margin-left: auto;margin-right: auto;color: #000;">
+                        <small style="line-height: 1.8;font-size: 8px;background: #fff;">
+                    </div>
+                    <style>
+
+
+                        #gmap_canvas img {
+                            max-width: none !important;
+                            background: none !important
+                        }
+                    </style>
+                </div>
+            </div>
+            <br />
+        </div>
+        <!-- /.container-fluid -->
+        <!-- Sticky Footer -->
+        <footer class="sticky-footer">
+            <div class="container my-auto">
+                <div class="copyright text-center my-auto">
+                    <span>Copyright © TravelEurope 2019.</span>
+                    <br /><br />
+                    <span>@DateTime.Now.ToShortDateString()</span>
+                </div>
+            </div>
+        </footer>
+    </div>
+    <!-- /.content-wrapper -->
+    </div>
+    <!-- /#wrapper -->
+    <!-- Scroll to Top Button-->
+    <a class="scroll-to-top rounded" href="#page-top">
+        <i class="fas fa-angle-up"></i>
+    </a>
+    <!-- Logout Modal-->
+    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Želite se odlogirati?</h5>
+                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">Pritisnite logout ako želite zatvoriti trenutnu sesiju.</div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                    @Html.ActionLink("Logout", "Index", "Home", new { area = "" }, new { @class = "btn btn-danger" })
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <environment exclude="Development">
+        <script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-3.3.1.min.js"
+                asp-fallback-src="~/vendor/jquery/dist/jquery.min.js"
+                asp-fallback-test="window.jQuery"
+                crossorigin="anonymous"
+                integrity="sha384-tsQFqpEReu7ZLhBV2VZlAu7zcOV+rXbYlF2cqB8txI/8aZajjp4Bqd+V6D5IgvKT">
+        </script>
+        <script src="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.7/bootstrap.min.js"
+                asp-fallback-src="~/vendor/bootstrap/dist/js/bootstrap.min.js"
+                asp-fallback-test="window.jQuery && window.jQuery.fn && window.jQuery.fn.modal"
+                crossorigin="anonymous"
+                integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa">
+        </script>
+        <script src="~/js/site.min.js" asp-append-version="true"></script>
+    </environment>
+    @RenderSection("Scripts", required: false)
+</body>
+</html>

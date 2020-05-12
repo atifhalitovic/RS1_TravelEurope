@@ -1,0 +1,43 @@
+﻿@model TravelEurope.Areas.RadnikPanel.ViewModels.RadniciDetaljiVM
+@{
+    Layout = "RadnikPanelLayout";
+
+}
+<div class="form-group">
+    <div class="row">
+        <label asp-for="@Model.Radnik.RadnikId"></label>
+        <input asp-for="@Model.Radnik.RadnikId" hidden />
+    </div>
+    <div class="col">
+        <label asp-for="@Model.Radnik.ApplicationUser.Ime">Ime </label>
+        <input asp-for="@Model.Radnik.ApplicationUser.Ime" class="form-control col-6 col-sm-6" disabled>
+    </div>
+    <div class="col">
+        <label asp-for="@Model.Radnik.ApplicationUser.Prezime">Prezime </label>
+        <textarea asp-for="@Model.Radnik.ApplicationUser.Prezime" class="form-control col-6 col-sm-6"></textarea>
+    </div>
+    <div class="col">
+        <label asp-for="@Model.Radnik.ApplicationUser.JMBG">JMBG </label>
+        <textarea asp-for="@Model.Radnik.ApplicationUser.JMBG" class="form-control col-6 col-sm-6"></textarea>
+    </div>
+    <div class="col">
+        <label asp-for="@Model.Radnik.ApplicationUser.Adresa">Adresa </label>
+        <textarea asp-for="@Model.Radnik.ApplicationUser.Adresa" class="form-control col-6 col-sm-6"></textarea>
+    </div>
+    <div class="col">
+        <label asp-for="@Model.Radnik.ApplicationUser.Telefon">Telefon </label>
+        <textarea asp-for="@Model.Radnik.ApplicationUser.Telefon" class="form-control col-6 col-sm-6"></textarea>
+    </div>
+    <div class="col">
+        <label asp-for="@Model.Radnik.ApplicationUser.Grad">Grad </label>
+        <textarea asp-for="@Model.Radnik.ApplicationUser.Grad" class="form-control col-6 col-sm-6"></textarea>
+    </div>
+    <div class="col">
+        <label asp-for="@Model.Radnik.GodineStaza">Godine staza </label>
+        <textarea asp-for="@Model.Radnik.GodineStaza" class="form-control col-6 col-sm-6"></textarea>
+    </div>
+    <div class="col">
+        <label asp-for="@Model.Radnik.Pozicija">Pozicija </label>
+        <textarea asp-for="@Model.Radnik.Pozicija" class="form-control col-6 col-sm-6"></textarea>
+    </div>
+</div>

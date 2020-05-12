@@ -1,0 +1,32 @@
+﻿@using TravelEurope.Areas.RadnikPanel.ViewModels
+@model TravelEurope.Areas.RadnikPanel.ViewModels.VozaciDodajVM
+@{
+    ViewData["Title"] = "TravelEurope";
+    Layout = "RadnikPanelLayout";
+
+}
+<h2>Uredite vozača</h2>
+<form asp-action="Dodaj" method="post">
+    @Html.HiddenFor(x => x.VozacId)
+    <div class="col-md-4 col-sm-12 form-group">
+        <label asp-for="@Model.Ime">Ime</label>
+        <input name="Ime" asp-for="@Model.Ime" class="form-control" type="text" required />
+    </div>
+    <div class="col-md-4 col-sm-12 form-group">
+        <label asp-for="@Model.Prezime">Prezime</label>
+        <input name="Prezime" asp-for="@Model.Prezime" class="form-control" type="text" required />
+    </div>
+    <div class="col-md-4 col-sm-12 form-group">
+        <label asp-for="@Model.BrVozackeDozvole">Broj vozacke dozvole</label>
+        <input name="BrVozackeDozvole" asp-for="@Model.BrVozackeDozvole" class="form-control" type="text" required />
+    </div>
+    <div class="col-md-4 col-sm-12 form-group">
+        @Html.Label("Status: ")
+        @Html.DropDownListFor(model => model.StatusVozacaId, Model.StatusVozacaList, new { @class = "form-control" })
+    </div>
+    <div class="col-md-4 col-sm-12 form-group">
+        <label asp-for="@Model.CijenaPoDanu">Cijena po danu</label>
+        <input asp-for="@Model.CijenaPoDanu" class="form-control" type="number" />
+    </div>
+    <button type="submit" class="btn btn-success">Sačuvaj</button>
+</form>

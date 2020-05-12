@@ -1,0 +1,51 @@
+﻿@using TravelEurope.Areas.AdminPanel.ViewModels
+@model TravelEurope.Areas.AdminPanel.ViewModels.VozilaDodajVM
+@{
+    ViewData["Title"] = "TravelEurope";
+    Layout = "AdminPanelLayout";
+}
+<h2>Uredite vozilo</h2>
+<form asp-area="AdminPanel" asp-controller="Vozila" asp-action="Dodaj">
+    <input type="hidden" value="@Model.VoziloId" name="VoziloId" />
+    <div class="col-md-4 col-sm-12 form-group">
+        <label>Naziv: </label>
+        <input asp-for="@Model.Naziv" class="form-control" type="text" />
+    </div>
+    <div class="col-md-4 col-sm-12 form-group">
+        @Html.Label("Tip vozila")
+        @Html.DropDownListFor(model => model.TipVozilaId, Model.TipVozilaLista, new { @class = "form-control" })
+    </div>
+    <div class="col-md-4 col-sm-12 form-group">
+        <label asp-for="@Model.GodinaProizvodnje">Godina proizvodnje</label>
+        @Html.DropDownListFor(m => m.GodinaProizvodnje, Enumerable.Range(DateTime.Today.Year - 5, 6).Select(i => new SelectListItem { Text = i.ToString(), Value = i.ToString() }))
+    </div>
+    <div class="col-md-4 col-sm-12 form-group">
+        @Html.Label("Marka vozila")
+        @Html.DropDownListFor(model => model.MarkaVozilaId, Model.MarkaVozilaLista, new { @class = "form-control" })
+    </div>
+    <div class="col-md-4 col-sm-12 form-group">
+        @Html.Label("Status vozila")
+        @Html.DropDownListFor(model => model.StatusVozilaId, Model.StatusVozilaLista, new { @class = "form-control" })
+    </div>
+    <div class="col-md-4 col-sm-12 form-group">
+        @Html.Label("Vrsta goriva")
+        @Html.DropDownListFor(model => model.VrstaGorivaId, Model.VrstaGorivaLista, new { @class = "form-control" })
+    </div>
+    <div class="col-md-4 col-sm-12 form-group">
+        <label>Boja: </label>
+        <input asp-for="@Model.Boja" class="form-control" type="text" />
+    </div>
+    <div class="col-md-4 col-sm-12 form-group">
+        <label asp-for="@Model.BrojSjedista">Broj sjedišta</label>
+        @Html.DropDownListFor(m => m.BrojSjedista, Enumerable.Range(2, 9).Select(i => new SelectListItem { Text = i.ToString(), Value = i.ToString() }))
+    </div>
+    <div class="col-md-4 col-sm-12 form-group">
+        <label asp-for="@Model.BrojVrata">Broj vrata</label>
+        @Html.DropDownListFor(m => m.BrojVrata, Enumerable.Range(2, 6).Select(i => new SelectListItem { Text = i.ToString(), Value = i.ToString() }))
+    </div>
+    <div class="col-md-4 col-sm-12 form-group">
+        <label asp-for="@Model.CijenaPoDanu">Cijena po danu</label>
+        <input asp-for="@Model.CijenaPoDanu" class="form-control" type="number" />
+    </div>
+    <button type="submit" class="btn btn-success">Sačuvaj</button>
+</form>

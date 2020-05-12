@@ -1,0 +1,540 @@
+﻿<!DOCTYPE html>
+@using Microsoft.AspNetCore.Identity
+@using System.Security.Claims;
+@inject SignInManager<ApplicationUser> signInManager
+@inject UserManager<ApplicationUser> userManager
+
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>TravelEurope</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="" name="keywords">
+    <meta content="" name="description">
+    <environment include="Production">
+        <!-- Favicons -->
+        <link href="img/favicon.png" rel="icon" asp-append-version="true">
+        <link href="img/apple-touch-icon.png" rel="apple-touch-icon" asp-append-version="true">
+        <!-- Google Fonts -->
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i|Raleway:300,400,500,700,800|Montserrat:300,400,700" rel="stylesheet" asp-append-version="true">
+        <!-- Bootstrap CSS File -->
+        <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" asp-append-version="true">
+        <!-- Libraries CSS Files -->
+        <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css" asp-append-version="true">
+        <link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" asp-append-version="true">
+        <link href="vendor/animate/animate.min.css" rel="stylesheet" asp-append-version="true">
+        <link href="vendor/ionicons/css/ionicons.min.css" rel="stylesheet" asp-append-version="true">
+        <link href="vendor/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet" asp-append-version="true">
+        <link href="vendor/magnific-popup/magnific-popup.css" rel="stylesheet" asp-append-version="true">
+        <link href="vendor/ionicons/css/ionicons.min.css" rel="stylesheet" asp-append-version="true">
+        <!-- Main Stylesheet File -->
+        <link href="css/style.css" rel="stylesheet" asp-append-version="true">
+    </environment>
+    <title>TravelEurope system</title>
+</head>
+<body id="body">
+    <!--==========================
+      Top Bar
+    ============================-->
+    <section id="topbar" class="d-none d-lg-block">
+        <div class="container clearfix">
+            <div class="contact-info float-left">
+                <i class="fa fa-envelope-o"></i> <a href="mailto:kontakt@traveleurope.ba">kontakt@traveleurope.ba</a>
+                <i class="fa fa-phone"></i> +387 37 400 000
+            </div>
+            <div class="social-links float-right">
+                <a href="#" class="twitter"><i class="fa fa-twitter"></i></a>
+                <a href="#" class="facebook"><i class="fa fa-facebook"></i></a>
+                <a href="#" class="instagram"><i class="fa fa-instagram"></i></a>
+                <a href="#" class="google-plus"><i class="fa fa-google-plus"></i></a>
+                <a href="#" class="linkedin"><i class="fa fa-linkedin"></i></a>
+            </div>
+        </div>
+    </section>
+    <!--==========================
+      Header
+    ============================-->
+    <header id="header">
+        <div class="container">
+            <div id="logo" class="pull-left">
+                <h1><a href="#body" class="scrollto">Travel<span>Europe</span></a></h1>
+            </div>
+            <nav id="nav-menu-container">
+                @if (signInManager.IsSignedIn(User) && (User.IsInRole("Klijent")))
+                {
+                <ul class="nav-menu">
+                    <li class="menu-active"><a href="#">Home</a></li>
+                    <li><a href="#about">O nama</a></li>
+                    <li><a href="#services">Ponude</a></li>
+                    <li><a href="#portfolio">Portfolio</a></li>
+                    <li><a href="#team">Naš tim</a></li>
+                    <li><a href="#contact">Kontakt</a></li>
+                    <li class="nav-item dropdown no-arrow">
+                        <i class="fas fa-user-circle fa-fw"></i>
+                        <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown"
+                           aria-haspopup="true" aria-expanded="false">Dobrodošao, @User.Identity.Name    </a>
+                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
+                            <a class="dropdown-item" asp-controller="Profil" asp-action="Detalji" asp-route-id="@this.User.FindFirstValue(ClaimTypes.NameIdentifier)">Detalji</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" asp-controller="Account" asp-action="Logout">Logout</a>
+                        </div>
+                    </li>
+                </ul>
+                }
+                else if (signInManager.IsSignedIn(User) && (User.IsInRole("Administrator")))
+                {
+                    <ul class="nav-menu">
+                        <li class="menu-active"><a href="#">Home</a></li>
+                        <li><a href="#about">O nama</a></li>
+                        <li><a href="#services">Ponude</a></li>
+                        <li><a href="#portfolio">Portfolio</a></li>
+                        <li><a href="#team">Naš tim</a></li>
+                        <li><a href="#contact">Kontakt</a></li>
+                        <li class="nav-item dropdown no-arrow">
+                            <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown"
+                               aria-haspopup="true" aria-expanded="false">
+                                Dobrodošao, @User.Identity.Name
+                            </a><i class="fas fa-user-circle fa-fw"></i>
+                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
+                                <a class="dropdown-item" asp-area="AdminPanel" asp-controller="Home">Radni panel</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" asp-controller="Account" asp-action="Logout">Logout</a>
+                            </div>
+                        </li>
+                    </ul>
+                }
+                else if (signInManager.IsSignedIn(User) && (User.IsInRole("Radnik")))
+                {
+                    <ul class="nav-menu">
+                        <li class="menu-active"><a href="#">Home</a></li>
+                        <li><a href="#about">O nama</a></li>
+                        <li><a href="#services">Ponude</a></li>
+                        <li><a href="#portfolio">Portfolio</a></li>
+                        <li><a href="#team">Naš tim</a></li>
+                        <li><a href="#contact">Kontakt</a></li>
+                        <li class="nav-item dropdown no-arrow">
+                            <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown"
+                               aria-haspopup="true" aria-expanded="false">
+                                Dobrodošao, @User.Identity.Name
+                            </a><i class="fas fa-user-circle fa-fw"></i>
+                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
+                                <a class="dropdown-item" asp-area="RadnikPanel" asp-controller="Home">Radni panel</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" asp-controller="Account" asp-action="Logout">Logout</a>
+                            </div>
+                        </li>
+                    </ul>
+                }
+                else
+                {
+                    <ul class="nav-menu">
+                        <li class="menu-active"><a href="#">Home</a></li>
+                        <li><a href="#about">O nama</a></li>
+                        <li><a href="#services">Ponude</a></li>
+                        <li><a href="#portfolio">Portfolio</a></li>
+                        <li><a href="#team">Naš tim</a></li>
+                        <li><a href="#contact">Kontakt</a></li>
+                        <li><a asp-controller="Profil" asp-action="Kreiraj">Registracija</a></li>
+                        <li class="nav-item dropdown no-arrow">
+                            <i class="fas fa-user-circle fa-fw"></i>
+                            <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown"aria-haspopup="true" aria-expanded="false"></a>
+                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" asp-controller="Account" asp-action="Login">Login</a>
+                            </div>
+                        </li>
+                    </ul>
+                }
+            </nav>
+            <!-- #nav-menu-container -->
+        </div>
+    </header><!-- #header -->
+    <!--==========================
+      Intro Section
+    ============================-->
+    <section id="intro">
+        <div class="intro-content">
+            <h2>Doživite <span>putovanje života!</span><br><span>Sa nama</span> - moguće!</h2>
+            <div>
+                <a href="#about" class="btn-get-started scrollto">Više o nama</a>
+                <a href="#portfolio" class="btn-projects scrollto">Naša ponuda</a>
+            </div>
+        </div>
+        <div id="intro-carousel" class="owl-carousel">
+            <div class="item" style="background-image: url('img/intro-carousel/1.jpg');"></div>
+            <div class="item" style="background-image: url('img/intro-carousel/2.jpg');"></div>
+            <div class="item" style="background-image: url('img/intro-carousel/3.jpg');"></div>
+            <div class="item" style="background-image: url('img/intro-carousel/4.jpg');"></div>
+            <div class="item" style="background-image: url('img/intro-carousel/5.jpg');"></div>
+        </div>
+    </section><!-- #intro -->
+
+    <main id="main">
+        <!--==========================
+          About Section
+        ============================-->
+        <section id="about" class="wow fadeInUp">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-6 about-img">
+                        <img src="img/about-img.jpg" alt="">
+                    </div>
+                    <div class="col-lg-6 content">
+                        <h2>Ponuda najsavremenijih vozila, prilagođenih turist ruta i profesionalnih vozača!</h2>
+                        <h3>Certificirani od strane međunarodne organizacije za rent-a-car i turističke agencije.</h3>
+                        <ul>
+                            <li><i class="ion-android-checkmark-circle"></i> Savremena motorna vozila</li>
+                            <li><i class="ion-android-checkmark-circle"></i> Prilagođene turist rute za sve uzraste sa profesionalnim turističkim vodičem</li>
+                            <li><i class="ion-android-checkmark-circle"></i> Profesionalni certificani vozači sa dugogodišnjim iskustvom Vama na usluzi</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section><!-- #about -->
+        <partial name="_CookieConsentPartial" />
+        <section id="services">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Osnovna ponuda</h2>
+                    <p>Pogledajte našu cjelovitu ponudu i izaberite ono šta vama najviše odgovara.</p>
+                    <br /><p>@RenderBody()</p>
+                </div>
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="box wow fadeInLeft">
+                            <div class="icon"><i class="fa fa-car"></i></div>
+                            <h4 class="title"><a href="#portfolio">Motorna vozila</a></h4>
+                            <p class="description">Iznajmite savremeno vozilo iz naše ponude za vaš ukus. Automobil, skuter, motor - čekaju na vas.</p>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="box wow fadeInRight">
+                            <div class="icon"><i class="fa fa-toggle-off"></i></div>
+                            <h4 class="title"><a>Turist rute</a></h4>
+                            <p class="description">Izaberite jednu turist rutu iz naše ponude prilagođenu vašim zahtjevima i propozicijama.</p>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="box wow fadeInLeft" data-wow-delay="0.2s">
+                            <div class="icon"><i class="fa fa-car-side"></i></div>
+                            <h4 class="title"><a>Privatni vozači</a></h4>
+                            <p class="description">Ekipa profesionalnih vozača čeka vas da izaberete i počnete vašu vožnju samo uz TravelEurope.</p>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="box wow fadeInRight" data-wow-delay="0.2s">
+                            <div class="icon"><i class="fa fa-map"></i></div>
+                            <h4 class="title"><a>Osiguranje</a></h4>
+                            <p class="description">Budite osigurani tokom cijelog putovanja. Izaberite osiguranje po vašoj mjeri, samo u TravelEurope.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section><!-- #services -->
+
+        <section id="portfolio" class="wow fadeInUp">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Portfolio</h2>
+                    <p>Na idućim fotografijama možete vidjeti neka vozila i turist rute iz naše ponude.</p>
+                </div>
+            </div>
+            <div class="container-fluid">
+                <div class="row no-gutters">
+                    <div class="col-lg-3 col-md-4">
+                        <div class="portfolio-item wow fadeInUp">
+                            <a href="#" class="portfolio-popup">
+                                <img src="/img/portfolio/1.jpg" alt="">
+                                <div class="portfolio-overlay">
+                                    <div class="portfolio-info"><h2 class="wow fadeInUp">Portfolio Item 1</h2></div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-4">
+                        <div class="portfolio-item wow fadeInUp">
+                            <a href="img/portfolio/2.jpg" class="portfolio-popup">
+                                <img src="img/portfolio/2.jpg" alt="">
+                                <div class="portfolio-overlay">
+                                    <div class="portfolio-info"><h2 class="wow fadeInUp">Portfolio Item 2</h2></div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-4">
+                        <div class="portfolio-item wow fadeInUp">
+                            <a href="img/portfolio/3.jpg" class="portfolio-popup">
+                                <img src="img/portfolio/3.jpg" alt="">
+                                <div class="portfolio-overlay">
+                                    <div class="portfolio-info"><h2 class="wow fadeInUp">Portfolio Item 3</h2></div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-4">
+                        <div class="portfolio-item wow fadeInUp">
+                            <a href="img/portfolio/4.jpg" class="portfolio-popup">
+                                <img src="img/portfolio/4.jpg" alt="">
+                                <div class="portfolio-overlay">
+                                    <div class="portfolio-info"><h2 class="wow fadeInUp">Portfolio Item 4</h2></div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-4">
+                        <div class="portfolio-item wow fadeInUp">
+                            <a href="img/portfolio/5.jpg" class="portfolio-popup">
+                                <img src="img/portfolio/5.jpg" alt="">
+                                <div class="portfolio-overlay">
+                                    <div class="portfolio-info"><h2 class="wow fadeInUp">Portfolio Item 5</h2></div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-4">
+                        <div class="portfolio-item wow fadeInUp">
+                            <a href="img/portfolio/6.jpg" class="portfolio-popup">
+                                <img src="img/portfolio/6.jpg" alt="">
+                                <div class="portfolio-overlay">
+                                    <div class="portfolio-info"><h2 class="wow fadeInUp">Portfolio Item 6</h2></div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-4">
+                        <div class="portfolio-item wow fadeInUp">
+                            <a href="img/portfolio/7.jpg" class="portfolio-popup">
+                                <img src="img/portfolio/7.jpg" alt="">
+                                <div class="portfolio-overlay">
+                                    <div class="portfolio-info"><h2 class="wow fadeInUp">Portfolio Item 7</h2></div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-4">
+                        <div class="portfolio-item wow fadeInUp">
+                            <a href="img/portfolio/8.jpg" class="portfolio-popup">
+                                <img src="img/portfolio/8.jpg" alt="">
+                                <div class="portfolio-overlay">
+                                    <div class="portfolio-info"><h2 class="wow fadeInUp">Portfolio Item 8</h2></div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section><!-- #portfolio -->
+        <section id="testimonials" class="wow fadeInUp">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Iskustva</h2>
+                    <p>Pročitajte mišljenja naših korisnika koji su uspješno završili jednu ili više transakcija u našoj kompaniji.</p>
+                </div>
+                <div class="owl-carousel testimonials-carousel">
+                    <div class="testimonial-item">
+                        <p>
+                            <img src="img/quote-sign-left.png" class="quote-sign-left" alt="">
+                            Sve 5. Dečki su super.
+                            <img src="img/quote-sign-right.png" class="quote-sign-right" alt="">
+                        </p>
+                        <img src="img/testimonial-1.jpg" class="testimonial-img" alt="">
+                        <h3>Saul Goodman</h3>
+                        <h4>Ceo &amp; Founder</h4>
+                    </div>
+                    <div class="testimonial-item">
+                        <p>
+                            <img src="img/quote-sign-left.png" class="quote-sign-left" alt="">
+                            Svaka čast momci ko god ovo vodi.
+                            <img src="img/quote-sign-right.png" class="quote-sign-right" alt="">
+                        </p>
+                        <img src="img/testimonial-2.jpg" class="testimonial-img" alt="">
+                        <h3>Sara Wilsson</h3>
+                        <h4>Designer</h4>
+                    </div>
+                    <div class="testimonial-item">
+                        <p>
+                            <img src="img/quote-sign-left.png" class="quote-sign-left" alt="">
+                            Imala sam vozača Huseina Mušića, (ne)zaboravno iskustvo.
+                            <img src="img/quote-sign-right.png" class="quote-sign-right" alt="">
+                        </p>
+                        <img src="img/testimonial-3.jpg" class="testimonial-img" alt="">
+                        <h3>Jena Karlis</h3>
+                        <h4>Store Owner</h4>
+                    </div>
+                    <div class="testimonial-item">
+                        <p>
+                            <img src="img/quote-sign-left.png" class="quote-sign-left" alt="">
+                            Prošle sedmice sam išao sa vozačem zvan Budo Sivić. Svaka čast.
+                            <img src="img/quote-sign-right.png" class="quote-sign-right" alt="">
+                        </p>
+                        <img src="img/testimonial-4.jpg" class="testimonial-img" alt="">
+                        <h3>Matt Brandon</h3>
+                        <h4>Freelancer</h4>
+                    </div>
+                    <div class="testimonial-item">
+                        <p>
+                            <img src="img/quote-sign-left.png" class="quote-sign-left" alt="">
+                            Ja sam ostavio najduži tekst ovdje jer sam zaposlen ovdje. Pišem samo iste iste iste stvari. Svaka čast momci ko god ovo vodi.
+                            <img src="img/quote-sign-right.png" class="quote-sign-right" alt="">
+                        </p>
+                        <img src="img/testimonial-5.jpg" class="testimonial-img" alt="">
+                        <h3>John Larson</h3>
+                        <h4>Entrepreneur</h4>
+                    </div>
+                </div>
+            </div>
+        </section><!-- #testimonials -->
+        <section id="team" class="wow fadeInUp">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Naš tim</h2>
+                </div>
+                <div class="row">
+                    <div class="col-lg-3 col-md-6">
+                        <div class="member">
+                            <div class="pic"><img src="img/team-1.jpg" alt=""></div>
+                            <div class="details">
+                                <h4>Walter White</h4>
+                                <span>Chief Executive Officer</span>
+                                <div class="social">
+                                    <a href=""><i class="fa fa-dot-circle"></i></a>
+                                    <a href=""><i class="fa fa-dot-circle"></i></a>
+                                    <a href=""><i class="fa fa-dot-circle"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6">
+                        <div class="member">
+                            <div class="pic"><img src="img/team-2.jpg" alt=""></div>
+                            <div class="details">
+                                <h4>Sarah Jhinson</h4>
+                                <span>Product Manager</span>
+                                <div class="social">
+                                    <a href=""><i class="fa fa-dot-circle"></i></a>
+                                    <a href=""><i class="fa fa-dot-circle"></i></a>
+                                    <a href=""><i class="fa fa-dot-circle"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6">
+                        <div class="member">
+                            <div class="pic"><img src="img/team-3.jpg" alt=""></div>
+                            <div class="details">
+                                <h4>William Anderson</h4>
+                                <span>CTO</span>
+                                <div class="social">
+                                    <a href=""><i class="fa fa-dot-circle"></i></a>
+                                    <a href=""><i class="fa fa-dot-circle"></i></a>
+                                    <a href=""><i class="fa fa-dot-circle"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6">
+                        <div class="member">
+                            <div class="pic"><img src="img/team-4.jpg" alt=""></div>
+                            <div class="details">
+                                <h4>Amanda Jepson</h4>
+                                <span>Accountant</span>
+                                <div class="social">
+                                    <a href=""><i class="fa fa-dot-circle"></i></a>
+                                    <a href=""><i class="fa fa-dot-circle"></i></a>
+                                    <a href=""><i class="fa fa-dot-circle"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section><!-- #team -->
+        <!--==========================
+          Contact Section
+        ============================-->
+        <section id="contact" class="wow fadeInUp">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Kontaktirajte nas</h2>
+                    <p>Izaberite jedan od tri načina za kontaktiranje TravelEurope. Potrudit ćemo se da što u kraćem roku odgovorimo.</p>
+                </div>
+                <div class="row contact-info">
+                    <div class="col-md-4">
+                        <div class="contact-address">
+                            <i class="ion-ios-location-outline"></i>
+                            <h3>Adresa</h3>
+                            <address>Aleja zlatnih ljiljana bb, Bosanska Krupa, BiH</address>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="contact-phone">
+                            <i class="ion-ios-telephone-outline"></i>
+                            <h3>Broj telefona</h3>
+                            <p><a href="tel:+38737400000">+387 37 400 000</a></p>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="contact-email">
+                            <i class="ion-ios-email-outline"></i>
+                            <h3>Email</h3>
+                            <p><a href="mailto:kontakt@traveleurope.ba">kontakt@traveleurope.ba</a></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="container mb-4">
+                <div style="overflow:hidden;width: 1050px;position: relative;">
+                    <iframe width="1050" height="440" src="https://maps.google.com/maps?width=1200&amp;height=440&amp;hl=en&amp;q=Gostilna%20kod%20Akare%20%22Garage%22+(Gostilna%20kod%20Akare%20%22Garage%22)&amp;ie=UTF8&amp;t=&amp;z=14&amp;iwloc=B&amp;output=embed"
+                            frameborder="0" scrolling="no" marginheight="0" marginwidth="0"></iframe>
+                    <div style="position: absolute;width: 80%;bottom: 20px;left: 0;right: 0;margin-left: auto;margin-right: auto;color: #000;">
+                        <small style="line-height: 1.8;font-size: 8px;background: #fff;">
+                    </div>
+                    <style>
+
+
+                        #gmap_canvas img {
+                            max-width: none !important;
+                            background: none !important
+                        }
+                    </style>
+                </div>
+            </div>
+        </section><!-- #contact -->
+
+        <a href="#" class="back-to-top"><i class="fa fa-chevron-up"></i></a>
+        <footer id="footer">
+            <div class="container">
+                <div class="copyright">
+                    &copy; Copyright <strong>TravelEurope</strong>. All Rights Reserved
+                    <br />
+                    <span>@DateTime.Now.ToShortDateString()</span>
+                </div>
+                <div class="credits">
+                    <!--
+                      All the links in the footer should remain intact.
+                      You can delete the links only if you purchased the pro version.
+                      Licensing information: https://bootstrapmade.com/license/
+                      Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/buy/?theme=Reveal
+                    -->
+                    Designed by TravelEurope
+                </div>
+            </div>
+        </footer>
+        <!-- JavaScript Libraries -->
+        <script src="vendor/jquery/jquery.min.js" asp-append-version="true"></script>
+        <script src="vendor/jquery/jquery-migrate.min.js" asp-append-version="true"></script>
+        <script src="vendor/bootstrap/js/bootstrap.bundle.min.js" asp-append-version="true"></script>
+        <script src="vendor/easing/easing.min.js" asp-append-version="true"></script>
+        <script src="vendor/superfish/hoverIntent.js" asp-append-version="true"></script>
+        <script src="vendor/superfish/superfish.min.js" asp-append-version="true"></script>
+        <script src="vendor/wow/wow.min.js" asp-append-version="true"></script>
+        <script src="vendor/owlcarousel/owl.carousel.min.js" asp-append-version="true"></script>
+        <script src="vendor/magnific-popup/magnific-popup.min.js" asp-append-version="true"></script>
+        <script src="vendor/sticky/sticky.js" asp-append-version="true"></script>
+        <!-- Contact Form JavaScript File -->
+        <script src="contactform/contactform.js" asp-append-version="true"></script>
+        <!-- Template Main Javascript File -->
+        <script src="js/main.js" asp-append-version="true"></script>
+        @RenderSection("Scripts", required: false)
+</body>
+</html>

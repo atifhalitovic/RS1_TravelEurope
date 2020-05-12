@@ -1,0 +1,26 @@
+﻿@using TravelEurope.Areas.RadnikPanel.ViewModels
+@model GradoviDodajVM
+@{
+    ViewData["Title"] = "TravelEurope";
+    Layout = "RadnikPanelLayout";
+
+}
+<h2>Uredite grad</h2>
+<form asp-action="Dodaj">
+    <input type="hidden" value="@Model.GradId" name="GradId" />
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4 col-sm-12 form-group">
+                <label asp-for="@Model.Naziv">Naziv grada</label>
+                <input asp-for="@Model.Naziv" class="form-control  col-md-12" type="text" placeholder="Unesite naziv grada: " required />
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4 col-sm-12 form-group">
+                <label asp-for="@Model.DrzavaId">Izaberite državu</label>
+                <select asp-for="@Model.DrzavaId" asp-items="@Model.DrzaveLista" class="form-control col-md-12"></select>
+            </div>
+        </div>
+        <button type="submit" class="btn btn-success">Sačuvaj</button>
+    </div>
+</form>

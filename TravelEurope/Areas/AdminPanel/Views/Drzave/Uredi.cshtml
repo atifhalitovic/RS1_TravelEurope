@@ -1,0 +1,24 @@
+﻿@model TravelEurope.Areas.AdminPanel.ViewModels.DrzaveDodajVM
+@{
+    ViewData["Title"] = "Title";
+    Layout = "AdminPanelLayout";
+}
+<h2>Uredite novu državu</h2>
+<form asp-area="AdminPanel" asp-controller="Drzave" asp-action="Dodaj">
+    @Html.HiddenFor(x => x.DrzavaId)
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4 col-sm-12 form-group">
+                <label asp-for="@Model.Naziv">Naziv države: </label>
+                <input asp-for="@Model.Naziv" class="form-control  col-md-12" type="text" placeholder="Unesite naziv države: " required />
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="row">
+            <div class="col-sm-4 text-right">
+                <button class="btn btn-secondary">Snimi</button>
+            </div>
+        </div>
+    </div>
+</form>

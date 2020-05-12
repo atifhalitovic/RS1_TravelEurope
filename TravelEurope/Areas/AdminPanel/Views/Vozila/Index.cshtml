@@ -1,0 +1,51 @@
+﻿@using TravelEurope.Areas.AdminPanel.ViewModels
+@model TravelEurope.Areas.AdminPanel.ViewModels.VozilaIndexVM
+@{
+    ViewData["Title"] = "TravelEurope";
+    Layout = "AdminPanelLayout";
+}
+<h2>Lista trenutnih vozila u ponudi</h2>
+<div class="card mb-3">
+    <div class="card-header">
+        <i class="fas fa-table"></i>
+        Trenutna vozila
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>Naziv</th>
+                        <th>Marka vozila</th>
+                        <th>Godina proizvodnje</th>
+                        <th>Tip vozila</th>
+                        <th>Status vozila</th>
+                        <th>Vrsta goriva</th>
+                        <th>Broj sjedista</th>
+                        <th>Boja</th>
+                        <th>Broj vrata</th>
+                        <th>Cijena usluge po danu</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var x in Model.Rows)
+                    {
+                    <tr>
+                        <td>@x.Naziv</td>
+                        <td>@x.MarkaVozila</td>
+                        <td>@x.GodinaProizvodnje.ToString()</td>
+                        <td>@x.TipVozila</td>
+                        <td>@x.StatusVozila.ToString()</td>
+                        <td>@x.VrstaGoriva</td>
+                        <td>@x.BrojSjedista</td>
+                        <td>@x.Boja</td>
+                        <td>@x.BrojVrata</td>
+                        <td>@x.CijenaPoDanu KM</td>
+                    </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+

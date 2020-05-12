@@ -1,0 +1,62 @@
+﻿@model TravelEurope.ViewModels.KorisniciVM
+@{
+    Layout = "_LayoutRegister";
+}
+<p></p>
+<p></p>
+<p></p>
+
+<h3>Dobro došli na registracijsku stranicu.</h3>
+<h4>Unesite svoje podatke!</h4>
+
+<form asp-controller="Registracija" asp-action="Dodaj" method="post">
+    <div class="form">
+        <div class="row">
+            <div class="form-group col-md-3">
+                <label asp-for="@Model.JMBG">JMBG</label>
+                <input name="JMBG" asp-for="@Model.JMBG" class="form-control  col-md-12" type="text" placeholder="Unesite JMBG radnika" autocomplete="off" required />
+            </div>
+            <div class="form-group col-md-3">
+                <label asp-for="@Model.Ime">Ime</label>
+                <input name="Ime" asp-for="@Model.Ime" class="form-control  col-md-12" type="text" placeholder="Unesite ime" min="2" max="20" autocomplete="off" required />
+            </div>
+            <div class="form-group col-md-3">
+                <label asp-for="@Model.Prezime">Prezime</label>
+                <input name="Prezime" asp-for="@Model.Prezime" class="form-control  col-md-12" type="text" placeholder="Unesite prezime" min="2" max="20" autocomplete="off" required />
+            </div>
+            <div class="form-group col-md-3">
+                <label asp-for="@Model.DatumRodjenja">Datum rođenja</label>
+                <input name="DatumRodjenja" asp-for="@Model.DatumRodjenja" class="form-control  col-md-12" type="date" required />
+            </div>
+            <div class="form-group col-md-3">
+                <label asp-for="@Model.Telefon">Telefon</label>
+                <input name="Telefon" asp-for="@Model.Telefon" type="text" class="form-control col-md-12" placeholder="Unesite broj telefona" autocomplete="off" required />
+            </div>
+            <div class="form-group col-md-3">
+
+                <label asp-for="@Model.Spol">Spol</label>
+                @Html.DropDownListFor(model => model.Spol, Model.Spolovi, new { @class = "form-control" })
+            </div>
+            <div class="form-group col-md-3">
+                <label asp-for="@Model.Adresa">Adresa</label>
+                <input name="Adresa" asp-for="@Model.Adresa" type="text" class="form-control col-md-12" placeholder="Unesite adresu" autocomplete="off" required />
+            </div>
+            <div class="form-group col-md-3">
+                <label asp-for="@Model.GradId">Grad</label>
+                @Html.DropDownListFor(model => model.GradId, Model.Gradovi, new { @class = "form-control" })
+            </div>
+            <div class="form-group col-md-3">
+                <label asp-for="@Model.BrojPasosa">Broj pasoša</label>
+                <input name="BrojPasosa" asp-for="@Model.BrojPasosa" type="text" class="form-control col-md-12" placeholder="Unesite broj pasoša" autocomplete="off" />
+            </div>
+            <div class="form-group col-md-3">
+                <label asp-for="@Model.BrVozackeDozvole">Broj vozačke dozvole</label>
+                <input name="BrVozackeDozvole" type="number" asp-for="@Model.BrVozackeDozvole" class="form-control" placeholder="Unesite broj vozačke dozvole" autocomplete="off" />
+            </div>
+        </div>
+        <input type="submit" class="btn btn-outline-success col-md-2" value="Registruj se" />
+    </div>
+</form>
+<p></p>
+<p></p>
+<p></p>

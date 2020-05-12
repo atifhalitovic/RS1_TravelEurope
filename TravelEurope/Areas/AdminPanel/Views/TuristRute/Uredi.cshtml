@@ -1,0 +1,31 @@
+﻿@using TravelEurope.Areas.AdminPanel.ViewModels
+@model TravelEurope.Areas.AdminPanel.ViewModels.TuristRuteDodajVM
+@{
+    ViewData["Title"] = "TravelEurope";
+    Layout = "AdminPanelLayout";
+}
+<h2>Uredite turist rutu</h2>
+<form asp-area="AdminPanel" asp-controller="TuristRute" asp-action="Dodaj">
+    @Html.HiddenFor(x => x.TuristRutaId)
+    <div class="col-md-4 col-sm-12 form-group">
+        <label asp-for="@Model.Naziv">Naziv</label>
+        <input name="Naziv" asp-for="@Model.Naziv" class="form-control" type="text" />
+    </div>
+    <div class="col-md-4 col-sm-12 form-group">
+        <label asp-for="@Model.Opis">Opis</label>
+        <input name="Opis" asp-for="@Model.Opis" class="form-control" type="text" required />
+    </div>
+    <div class="col-md-4 col-sm-12 form-group">
+        @Html.Label("Država: ")
+        @Html.DropDownListFor(model => model.DrzavaId, Model.DrzaveList, new { @class = "form-control" })
+    </div>
+    <div class="col-md-4 col-sm-12 form-group">
+        @Html.Label("Izaberite vodiča: ")
+        @Html.DropDownListFor(model => model.TuristickiVodicId, Model.VodiciList, new { @class = "form-control" })
+    </div>
+    <div class="col-md-4 col-sm-12 form-group">
+        <label asp-for="@Model.CijenaPoDanu">Cijena po danu</label>
+        <input asp-for="@Model.CijenaPoDanu" class="form-control" type="number" />
+    </div>
+    <button type="submit" class="btn btn-success">Sačuvaj</button>
+</form>

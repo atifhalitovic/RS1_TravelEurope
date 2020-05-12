@@ -1,0 +1,45 @@
+﻿@model TravelEurope.ViewModels.KorisniciVM
+@{
+    ViewData["Title"] = "TravelEurope";
+    Layout = "AdminPanelLayout";
+    Html.BeginForm("Snimi", "Home", new { area = "AdminPanel" });
+}
+
+<h2>Dodajte novog administratora</h2>
+<div class="col-md-4 col-sm-12 form-group">
+    <label asp-for="@Model.Ime">Ime</label>
+    <input asp-for="@Model.Ime" class="form-control  col-md-12" type="text" placeholder="Unesite ime" min="2" max="20" autocomplete="off" required />
+</div>
+<div class="col-md-4 col-sm-12 form-group">
+    <label asp-for="@Model.Prezime">Prezime</label>
+    <input asp-for="@Model.Prezime" class="form-control  col-md-12" type="text" placeholder="Unesite prezime" min="2" max="20" autocomplete="off" required />
+</div>
+<div class="col-md-4 col-sm-12 form-group">
+    <label asp-for="@Model.DatumRodjenja">Datum rođenja</label>
+    <input asp-for="@Model.DatumRodjenja" class="form-control  col-md-12" type="date" required />
+</div>
+<div class="col-md-4 col-sm-12 form-group">
+    <label asp-for="@Model.JMBG">JMBG</label>
+    <input asp-for="@Model.JMBG" class="form-control  col-md-12" type="text" placeholder="Unesite JMBG radnika" autocomplete="off" required />
+</div>
+<div class="col-md-4 col-sm-12 form-group">
+    <label asp-for="@Model.Telefon">Telefon</label>
+    <input asp-for="@Model.Telefon" type="text" class="form-control col-md-12" placeholder="Unesite broj telefona" autocomplete="off" required />
+</div>
+<div class="col-md-4 col-sm-12 form-group">
+    <label asp-for="@Model.Spol">Spol</label>
+    @Html.DropDownListFor(model => model.Spol, Model.Spolovi, new { @class = "form-control" })
+</div>
+<div class="col-md-4 col-sm-12 form-group">
+    <label asp-for="@Model.Adresa">Adresa</label>
+    <input asp-for="@Model.Adresa" type="text" class="form-control col-md-12" placeholder="Unesite adresu" autocomplete="off" required />
+</div>
+<div class="col-md-4 col-sm-12 form-group">
+    <label asp-for="@Model.GradId">Grad</label>
+    @Html.DropDownListFor(model => model.GradId, Model.Gradovi, new { @class = "form-control" })
+</div>
+<div class="col-md-4 form-group">
+    <label asp-for="@Model.IzjavaZastitaPodataka">Izjava zastite podataka:</label>
+    <input asp-for="@Model.IzjavaZastitaPodataka" type="text" class="form-control col-md-12" placeholder="Unesite izjavu zastite podataka" autocomplete="off" />
+</div>
+<button type="submit" class="btn btn-success">Sačuvaj</button>

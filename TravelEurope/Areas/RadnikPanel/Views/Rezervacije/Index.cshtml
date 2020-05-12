@@ -1,0 +1,55 @@
+﻿@using TravelEurope.Areas.RadnikPanel.ViewModels
+@model TravelEurope.Areas.RadnikPanel.ViewModels.RezervacijeIndexVM
+@{
+    ViewData["Title"] = "TravelEurope";
+    Layout = "RadnikPanelLayout";
+
+}
+<h2>Rezervacije se mogu pregledati nakon kreiranja modula Klijent koji pravi drugi student</h2>
+<div class="card mb-3">
+    <div class="card-header">
+        <i class="fas fa-table"></i>
+        Trenutne rezervacija
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>Broj rezervacije</th>
+                        <th>Datum kreiranja</th>
+                        <th>Datum završetka</th>
+                        <th>Cijena usluge po danu</th>
+                        <th>Cijena osiguranja</th>
+                        <th>Klijent</th>
+                        <th>Radnik</th>
+                        <th>Vozač</th>
+                        <th>Vozilo</th>
+                        <th>Turist ruta</th>
+                        <th>Ukupna cijena</th>
+                        <th>Akcije</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var x in Model.Rows)
+                    {
+                        <tr>
+                            <th>@x.RezervacijaId</th>
+                            <th>@x.DatumPreuzimanja</th>
+                            <th>@x.DatumVracanja</th>
+                            <th>@x.CijenaUslugePoDanu</th>
+                            <th>@x.CijenaOsiguranja</th>
+                            <th>@x.Klijent</th>
+                            <th>@x.Radnik</th>
+                            <th>@x.Vozac</th>
+                            <th>@x.Vozilo</th>
+                            <th>@x.TuristRuta</th>
+                            <th>@x.UkupnaCijena</th>
+                            <td><button type="button" class="btn btn-danger" href="Brisi.html">Default</button><button type="button" class="btn btn-default">Briši</button></td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

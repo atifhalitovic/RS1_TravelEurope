@@ -1,0 +1,158 @@
+﻿@model TravelEurope.ViewModels.KlijentProfilVM
+@using Microsoft.AspNetCore.Identity;
+@{
+    Layout = "_LayoutRegister";
+}
+<head>
+    <environment include="Production">
+        <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+        <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    </environment>
+</head>
+<body>
+    <div class="container emp-profile">
+        <form>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="profile-img">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS52y5aInsxSm31CvHOFHWujqUx_wWTS9iM6s7BAm21oEN_RiGoog" alt="" />
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="profile-head">
+                        <h4><br />@Model.Klijent.ApplicationUser.Ime @Model.Klijent.ApplicationUser.Prezime</h4>
+                        @if (User.IsInRole("Klijent"))
+                        {
+                            <h6>
+                                Klijent
+                            </h6>
+                        }
+                        <br />
+                        <ul class="nav nav-tabs" id="myTab" role="tablist">
+                            <li class="nav-item">
+                                <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Osnovno</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Više</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" id="akcije-tab" data-toggle="tab" href="#akcije" role="tab" aria-controls="akcije" aria-selected="false">Akcije</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-3">
+                </div>
+                <div class="col-md-6">
+                    <div class="tab-content profile-tab" id="myTabContent">
+                        <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label>Ime i prezime</label>
+                                </div>
+                                <div class="col-md-6">
+                                    <p>@Model.Klijent.ApplicationUser.Ime @Model.Klijent.ApplicationUser.Prezime</p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label>JMBG</label>
+                                </div>
+                                <div class="col-md-6">
+                                    <p>@Model.Klijent.ApplicationUser.JMBG</p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label>Datum rođenja</label>
+                                </div>
+                                <div class="col-md-6">
+                                    <p>@Model.Klijent.ApplicationUser.DatumRodjenja.ToShortDateString()</p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label>Telefon</label>
+                                </div>
+                                <div class="col-md-6">
+                                    <p>@Model.Klijent.ApplicationUser.Telefon</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label>Adresa</label>
+                                </div>
+                                <div class="col-md-6">
+                                    <p>@Model.Klijent.ApplicationUser.Adresa</p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label asp-for="@Model.Klijent.ApplicationUser.Grad">Grad</label>
+                                </div>
+                                <div class="col-md-6">
+                                    <p>@Model.Grad</p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label>Broj vozačke dozvole</label>
+                                </div>
+                                <div class="col-md-6">
+                                    <p>@Model.Klijent.BrVozackeDozvole</p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label>Broj pasoša</label>
+                                </div>
+                                <div class="col-md-6">
+                                    <p>@Model.Klijent.BrojPasosa</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane fade" id="akcije" role="tabpanel" aria-labelledby="akcije-tab">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label>Enable authenticator</label>
+                                </div>
+                                <div class="col-md-6">
+                                    <p><a asp-area="Identity" asp-page="/Account/Manage/EnableAuthenticator">Napravite 2way autentifikaciju</a></p>
+                                </div>
+                            </div>      
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label>Rezervacija paketa</label>
+                                </div>
+                                <div class="col-md-6">
+                                    <p>Link (drugi student)</p>
+                                </div>
+                            </div>       
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label>Printanje računa</label>
+                                </div>
+                                <div class="col-md-6">
+                                    <p>Link (drugi student)</p>
+                                </div>
+                            </div>       
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label>Uređenje profila</label>
+                                </div>
+                                <div class="col-md-6">
+                                    <p>Link (drugi student)</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</body>

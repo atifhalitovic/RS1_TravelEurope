@@ -1,0 +1,38 @@
+﻿@using TravelEurope.Areas.AdminPanel.ViewModels
+@model TravelEurope.Areas.AdminPanel.ViewModels.VozaciIndexVM
+@{
+    ViewData["Title"] = "TravelEurope";
+    Layout = "AdminPanelLayout";
+}
+<h2>Lista svih vozača</h2>
+<div class="card mb-3">
+    <div class="card-header">
+        <i class="fas fa-table"></i>
+        Trenutni vozači
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>Ime i prezime</th>
+                        <th>Broj vozačke dozvole</th>
+                        <th>Status vozača</th>
+                        <th>Cijena po danu</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var x in Model.Rows)
+                    {
+                    <tr>
+                        <td>@x.ImePrezime</td>
+                        <td>@x.BrVozackeDozvole</td>
+                        <td>@x.StatusVozaca</td>
+                        <td>@x.CijenaPoDanu KM</td>
+                    </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,90 @@
+﻿@using TravelEurope.Areas.RadnikPanel.ViewModels
+@model TravelEurope.Areas.RadnikPanel.ViewModels.VozaciIndexVM
+@{
+    ViewData["Title"] = "TravelEurope";
+    Layout = "RadnikPanelLayout";
+}
+<h2>Lista svih vozača</h2>
+
+<div id="nekiId">
+    <div class="card mb-3">
+        <div class="card-header">
+            <i class="fas fa-table"></i>
+            Trenutni vozači
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>Ime i prezime</th>
+                            <th>Broj vozačke dozvole</th>
+                            <th>Status vozača</th>
+                            <th>Cijena po danu</th>
+                            <th>Akcije</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var x in Model.Rows)
+                        {
+                            <tr>
+                                <td>@x.ImePrezime</td>
+                                <td>@x.BrVozackeDozvole</td>
+                                <td>
+                                    @if (x.StatusVozaca == "Dostupan")
+                                    {
+                                        <a asp-action="VozacDostupan" asp-controller="Vozaci" class="btn btn-success" asp-route-id="@x.VozacId">Dostupan</a>
+                                    }
+                                    else
+                                    {
+                                        <a asp-action="VozacNedostupan" asp-controller="Vozaci" class="btn btn-danger" asp-route-id="@x.VozacId">Nedostupan</a>
+                                    }
+                                </td>
+                                <td>@x.CijenaPoDanu KM</td>
+                                <td>
+                                    <a asp-action="Uredi" asp-controller="Vozaci" asp-route-id="@x.VozacId" class="btn btn-info font-sizes"><i class="fas fa-search icons-margin-right"></i>Uredi</a>
+                                    <a asp-action="Obrisi" asp-controller="Vozaci" asp-route-id="@x.VozacId" class="btn btn-danger font-sizes"><i class="fas fa-delete icons-margin-right"></i>Obriši vozača</a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<a asp-action="Dodaj" asp-controller="Vozaci" class="btn btn-success  col-md-2 font-sizes"><i class="fas fa-plus-circle icons-margin-right"></i> Dodaj vozača</a>
+
+<script>
+$(function () {
+        $(".btnDostupan").click(function () {
+
+            var btn = $(this);
+            var id = btn.attr("idValue");
+
+            $.ajax({
+                url: "@Url.Action("VozacDostupan", "Vozaci")",
+                type: "GET",
+                data: { id: id },
+                success: function (result) {
+                    $("#nekiId").html(result);
+                }
+                });
+        });
+
+        $(".btnNedostupan").click(function () {
+
+            var btn = $(this);
+            var id = btn.attr("idValue");
+
+            $.ajax({
+                url: "@Url.Action("VozacNedostupan", "Vozaci")",
+                type: "GET",
+                data: { id: id },
+                success: function (result) {
+                    $("#nekiId").html(result);
+                }
+                });
+        });
+    });
+</script>
